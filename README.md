@@ -10,3 +10,4 @@ Swiping on cells will remove them and selecting them will expand for full screen
 Followed this Guide: https://www.raywenderlich.com/170075/android-recyclerview-tutorial-kotlin
 
 Download on Google Play: http://play.google.com/store/apps/details?id=com.appleeducate.dailynasa
+![alt text](https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png)
