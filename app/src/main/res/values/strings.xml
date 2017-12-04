@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Galacticon</string>
+  <string name="app_name">Daily NASA</string>
   <string name="api_key">ecbPd1gAXph1ytyKAEUeu7KRB5xGEx5XOkB7Xoi4</string>
 
   <string name="title_activity_fullscreen">FullscreenActivity</string>
