@@ -9,8 +9,8 @@ android {
         applicationId 'com.appleeducate.dailynasa'
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 101
+        versionName "1.0.1"
     }
     buildTypes {
         release {
@@ -31,7 +31,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
     compile 'com.android.support:support-v4:26.1.0'
-    compile 'com.google.firebase:firebase-ads:9.0.2'
+    compile 'com.google.firebase:firebase-ads:11.6.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
