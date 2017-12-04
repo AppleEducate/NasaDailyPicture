@@ -1,4 +1,4 @@
-package com.raywenderlich.galacticon
+package com.appleeducate.dailynasa
 
 import android.support.annotation.LayoutRes
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.raywenderlich.galacticon
+package com.appleeducate.dailynasa
 
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
