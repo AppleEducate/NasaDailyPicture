@@ -1,13 +1,8 @@
-# NasaDailyPicture
+# daily_nasa
 
-Uses Nasa API: https://api.nasa.gov/index.html#getting-started
+Daily Pic Nasa.
 
-Gets Daily picture and description and shows them in a recycle view that can switch from grid and list layout.
-Swiping on cells will remove them and selecting them will expand for full screen content.
+## Getting Started
 
-![alt text](https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/assasn-14li_banner_0.jpg)
-
-Followed this Guide: https://www.raywenderlich.com/170075/android-recyclerview-tutorial-kotlin
-
-Download on Google Play: http://play.google.com/store/apps/details?id=com.appleeducate.dailynasa
-![alt text](https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png)
+For help getting started with Flutter, view our online
+[documentation](https://flutter.io/).
