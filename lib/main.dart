@@ -49,10 +49,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   
   List data;
+  String apiKey = "ecbPd1gAXph1ytyKAEUeu7KRB5xGEx5XOkB7Xoi4";
+  int count = 10;
 
   Future<String> getData() async {
     var response = await http.get(
-      Uri.encodeFull("https://api.nasa.gov/planetary/apod?api_key=ecbPd1gAXph1ytyKAEUeu7KRB5xGEx5XOkB7Xoi4&count=10"),
+      Uri.encodeFull("https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
       headers: {
         "Accept": "application/json"
       }
