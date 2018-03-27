@@ -2,6 +2,7 @@ name: daily_nasa
 description: Daily Pic Nasa.
 
 dependencies:
+  flutter_staggered_grid_view: "^0.1.2"
   flutter:
     sdk: flutter
 
