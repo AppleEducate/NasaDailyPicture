@@ -51,27 +51,56 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List data;
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      new GlobalKey<RefreshIndicatorState>();
+  List data = [];
   String apiKey = "ecbPd1gAXph1ytyKAEUeu7KRB5xGEx5XOkB7Xoi4";
-  int count = 10;
+  int count = 50;
 
-  Future<String> getData() async {
+  Future getData() async {
+    _refreshIndicatorKey.currentState?.show();
     var response = await http.get(
         Uri.encodeFull(
             "https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
         headers: {"Accept": "application/json"});
-
+    var items = JSON.decode(response.body);
     this.setState(() {
-      data = JSON.decode(response.body);
+      data = items;
     });
-    print(data[1]["title"]);
-
-    return "Success!";
   }
 
   @override
   void initState() {
     this.getData();
+  }
+
+  Widget buildCellTile(String image, String label) {
+    return new Card(
+      elevation: 1.0,
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        verticalDirection: VerticalDirection.down,
+        children: <Widget>[
+          new Expanded(
+            child: new Image.network(
+              image,
+              height: 65.0,
+              width: 65.0,
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          new Container(
+            height: 10.0,
+          ),
+          new Center(
+              child: new Text(
+            label,
+            textAlign: TextAlign.center,
+          )),
+        ],
+      ),
+    );
   }
 
   @override
@@ -80,43 +109,32 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text("Daily NASA"),
       ),
-      body: new StaggeredGridView.countBuilder(
-        crossAxisCount: 4,
-        itemCount: count,
-        itemBuilder: (BuildContext context, int index) => new Card(
-              child: new InkWell(
-                  onTap: () {
-                    globals.id = data[index]["hdurl"];
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => new ImageDetailsPage()),
-                    );
-                  },
-                  child: new Column(
-                    children: <Widget>[
-                      new Text(
-                        data[index]["title"],
-                        textAlign: TextAlign.center,
-                        style: new TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14.0),
-                      ),
-                      new Expanded(
-                        child: new Image.network(
-                          data[index]["url"],
-                        ),
-                      ),
-                      new Text(
-                        data[index]["date"],
-                        style: new TextStyle(fontSize: 10.0),
-                      ),
-                    ],
-                  )),
-            ),
-        staggeredTileBuilder: (int index) =>
-            new StaggeredTile.count(2, index.isEven ? 3 : 1),
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
+      body: new RefreshIndicator(
+        key: _refreshIndicatorKey,
+        onRefresh: getData,
+        child: new GridView.builder(
+          gridDelegate:
+              new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          scrollDirection: Axis.vertical,
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemCount: data.length,
+          itemBuilder: (BuildContext context, int index) {
+            return new InkWell(
+              onTap: () {
+                globals.firstname = data[index]["title"];
+                globals.lastname = data[index]["date"];
+                globals.id = data[index]["hdurl"] == null ? data[index]["url"] : data[index]["hdurl"];
+                globals.description = data[index]["explanation"];
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => new ImageDetailsPage()),
+                );
+              },
+              child: buildCellTile(data[index]["hdurl"] == null ? data[index]["url"] : data[index]["hdurl"], data[index]["title"]),
+            );
+          },
+        ),
       ),
     );
   }

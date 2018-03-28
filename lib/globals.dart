@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //Variables
 bool isLoggedIn = false;
@@ -11,15 +12,17 @@ String token = "";
 String domain = "";
 String apiURL = "https://reqres.in/api/users/2";
 String error = "";
+String description = "";
 
 String id = "0";
 String firstname = "Test";
 String lastname = "Test";
-String avatar = "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg";
+String avatar =
+    "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg";
 
 class Utility {
-
-  static Future<Null> showAlertPopup(BuildContext context, String title, String detail1, String detail2) async {
+  static Future<Null> showAlertPopup(BuildContext context, String title,
+      String detail1, String detail2) async {
     return showDialog<Null>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -45,7 +48,8 @@ class Utility {
     );
   }
 
-  static Future<String> getData(String calltypeParm, String modParm, String actionParm, String paramsParm, String fooParm) async {
+  static Future<String> getData(String calltypeParm, String modParm,
+      String actionParm, String paramsParm, String fooParm) async {
     var requestURL = apiURL;
 //    requestURL = requestURL + "calltype=" + calltypeParm;
 //    requestURL = requestURL + "&mod=" + modParm;
@@ -68,12 +72,21 @@ class Utility {
           result = 'Error Getting Data';
         }
       } else {
-        result = 'Error getting IP address:\nHttp status ${response.statusCode}';
+        result =
+            'Error getting IP address:\nHttp status ${response.statusCode}';
       }
     } catch (exception) {
       result = 'Failed getting IP address';
     }
     print("Result: " + result);
     return result;
+  }
+
+  static launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';  
+    }
   }
 }

@@ -8,12 +8,16 @@ import 'package:daily_nasa/globals.dart' as globals;
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ImageDetailsPage extends StatelessWidget {
-  String title = "";
+  String title = globals.firstname;
   String hdImageUrl = globals.id;
-  String dateCreated = "";
+  String dateCreated = globals.lastname;
+  String description = globals.description;
 
   @override
-  void initState() {
+  void initState() {}
+
+  Future openImage() async {
+    globals.Utility.launchURL(hdImageUrl);
   }
 
   @override
@@ -22,17 +26,23 @@ class ImageDetailsPage extends StatelessWidget {
         appBar: new AppBar(
           title: new Text("Image Details"),
         ),
-        body: new Column(
+        body: new ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(20.0),
           children: <Widget>[
             new Text(
               title,
-              textAlign: TextAlign.center,
-              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
-            new Expanded(
+            new InkWell(
+              onTap: openImage,
               child: new Image.network(
                 hdImageUrl,
               ),
+            ),
+            new Text(
+              description,
+              style: new TextStyle(fontSize: 14.0),
             ),
             new Text(
               dateCreated,
