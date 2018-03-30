@@ -15,19 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Daily Nasa',
       theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-        // counter didn't reset back to zero; the application is not restarted.
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.blue,
+        accentColor: Colors.redAccent,
+        primaryColorBrightness: Brightness.dark,
       ),
-      home: new MyHomePage(title: 'Daily Nasa Home Page'),
+      home: new MyHomePage(),
     );
   }
 }
@@ -53,29 +47,36 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
-  var data;
+
+  List data;
   String apiKey = "ecbPd1gAXph1ytyKAEUeu7KRB5xGEx5XOkB7Xoi4";
-  int count = 50;
+  int count = 100;
+  bool _reverse = false;
 
   Future getData() async {
-    _refreshIndicatorKey.currentState?.show();
-    var response = await http.get(
-        Uri.encodeFull(
-            "https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
-        headers: {"Accept": "application/json"});
-    var items = JSON.decode(response.body);
+    // _reverse = true;
+    // _refreshIndicatorKey.currentState?.show();
+     String result = "" + await globals.Utility.getData('https://api.nasa.gov/planetary/apod?', 'api_key=$apiKey&count=$count');
+    // String response = "" + await http.get(
+    //     Uri.encodeFull(
+    //         "https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
+    //     headers: {"Accept": "application/json"});
+    // List items = JSON.decode(response.body);
     this.setState(() {
-      data = items;
+      // data = items;
+      List decoded = JSON.decode(result);
+      // oldData = decoded['objects'];
+      data = decoded;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    this.getData();
+    _onRefresh();
   }
 
-  Widget buildCellTile(String image, String title, String date) {
+  Widget buildCellTile(int index, List data) {
     return new Card(
       elevation: 1.0,
       child: new Column(
@@ -85,13 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           new Center(
               child: new Text(
-            title,
+            data[index]["title"],
             style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
             textAlign: TextAlign.center,
           )),
           new Expanded(
             child: new Image.network(
-              image,
+              data[index]["url"],
               height: 65.0,
               width: 65.0,
               fit: BoxFit.fitHeight,
@@ -102,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           new Center(
               child: new Text(
-            date,
+            data[index]["date"],
             textAlign: TextAlign.center,
           )),
         ],
@@ -110,49 +111,63 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Future<Null> _onRefresh() {
+    Completer<Null> completer = new Completer<Null>();
+
+    getData();
+    completer.complete();
+
+    return completer.future;
+  }
+
+  Widget getTiles(List items) {
+    // print('Getting $tab Videos');
+    double width = MediaQuery.of(context).size.width;
+    int axisCount =
+        width <= 500.0 ? 2 : width <= 800.0 ? 3 : width <= 1100.0 ? 4 : 5;
+    return new RefreshIndicator(
+      key: _refreshIndicatorKey,
+      onRefresh: _onRefresh,
+      child: new GridView.builder(
+        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: axisCount),
+        scrollDirection: Axis.vertical,
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: items == null ? 0 : items.length,
+        itemBuilder: (BuildContext context, int index) {
+          print('Index: $index / Length: ' +
+              data.length.toString() +
+              ' / Count: $count');
+          if (index + 1 == data.length && index + 1 == count) {
+            count = count + 100;
+            getData();
+          }
+          return new InkWell(
+            onTap: () {
+              globals.firstname = data[index]["title"];
+              globals.lastname = data[index]["date"];
+              globals.id = data[index]["hdurl"];
+              globals.description = data[index]["explanation"];
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => new ImageDetailsPage()),
+              );
+            },
+            child: buildCellTile(index, data),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Daily NASA"),
       ),
-      body: new RefreshIndicator(
-        key: _refreshIndicatorKey,
-        onRefresh: getData,
-        child: new GridView.builder(
-          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: width <= 500.0
-                  ? 2
-                  : width <= 800.0 ? 3 : width <= 1100.0 ? 4 : 5),
-          scrollDirection: Axis.vertical,
-          physics: const AlwaysScrollableScrollPhysics(),
-          itemCount: data == null ? 0 : data.length,
-          itemBuilder: (BuildContext context, int index) {
-            return new InkWell(
-              onTap: () {
-                globals.firstname = data[index]["title"];
-                globals.lastname = data[index]["date"];
-                globals.id = data[index]["hdurl"] == null
-                    ? data[index]["url"]
-                    : data[index]["hdurl"];
-                globals.description = data[index]["explanation"];
-                Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                      builder: (context) => new ImageDetailsPage()),
-                );
-              },
-              child: buildCellTile(
-                  data[index]["hdurl"] == null
-                      ? data[index]["url"]
-                      : data[index]["hdurl"],
-                  data[index]["title"] == null ? "" : data[index]["title"],
-                  data[index]["date"] == null ? "" : data[index]["date"]),
-            );
-          },
-        ),
-      ),
+      body: getTiles(data),
     );
   }
 }

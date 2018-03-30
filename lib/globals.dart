@@ -48,14 +48,14 @@ class Utility {
     );
   }
 
-  static Future<String> getData(String calltypeParm, String modParm,
-      String actionParm, String paramsParm, String fooParm) async {
-    var requestURL = apiURL;
+  static Future<String> getData(String api, String headers) async {
+    var requestURL = api;
 //    requestURL = requestURL + "calltype=" + calltypeParm;
 //    requestURL = requestURL + "&mod=" + modParm;
 //    requestURL = requestURL + "&?action=" + actionParm;
 //    requestURL = requestURL + "&?param=" + paramsParm;
 //    requestURL = requestURL + "&?foo=" + fooParm;
+    requestURL = requestURL + headers;
     print("Request URL: " + requestURL);
 
     var url = requestURL;
@@ -86,7 +86,7 @@ class Utility {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';  
+      throw 'Could not launch $url';
     }
   }
 }
