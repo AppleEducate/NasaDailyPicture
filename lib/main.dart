@@ -53,7 +53,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
-  List data = [];
+  var data;
   String apiKey = "ecbPd1gAXph1ytyKAEUeu7KRB5xGEx5XOkB7Xoi4";
   int count = 50;
 
@@ -71,10 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    super.initState();
     this.getData();
   }
 
-  Widget buildCellTile(String image, String label) {
+  Widget buildCellTile(String image, String title, String date) {
     return new Card(
       elevation: 1.0,
       child: new Column(
@@ -82,6 +83,12 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisSize: MainAxisSize.min,
         verticalDirection: VerticalDirection.down,
         children: <Widget>[
+          new Center(
+              child: new Text(
+            title,
+            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+            textAlign: TextAlign.center,
+          )),
           new Expanded(
             child: new Image.network(
               image,
@@ -95,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           new Center(
               child: new Text(
-            label,
+            date,
             textAlign: TextAlign.center,
           )),
         ],
@@ -105,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Daily NASA"),
@@ -113,17 +121,21 @@ class _MyHomePageState extends State<MyHomePage> {
         key: _refreshIndicatorKey,
         onRefresh: getData,
         child: new GridView.builder(
-          gridDelegate:
-              new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: width <= 500.0
+                  ? 2
+                  : width <= 800.0 ? 3 : width <= 1100.0 ? 4 : 5),
           scrollDirection: Axis.vertical,
           physics: const AlwaysScrollableScrollPhysics(),
-          itemCount: data.length,
+          itemCount: data == null ? 0 : data.length,
           itemBuilder: (BuildContext context, int index) {
             return new InkWell(
               onTap: () {
                 globals.firstname = data[index]["title"];
                 globals.lastname = data[index]["date"];
-                globals.id = data[index]["hdurl"] == null ? data[index]["url"] : data[index]["hdurl"];
+                globals.id = data[index]["hdurl"] == null
+                    ? data[index]["url"]
+                    : data[index]["hdurl"];
                 globals.description = data[index]["explanation"];
                 Navigator.push(
                   context,
@@ -131,7 +143,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (context) => new ImageDetailsPage()),
                 );
               },
-              child: buildCellTile(data[index]["hdurl"] == null ? data[index]["url"] : data[index]["hdurl"], data[index]["title"]),
+              child: buildCellTile(
+                  data[index]["hdurl"] == null
+                      ? data[index]["url"]
+                      : data[index]["hdurl"],
+                  data[index]["title"] == null ? "" : data[index]["title"],
+                  data[index]["date"] == null ? "" : data[index]["date"]),
             );
           },
         ),
