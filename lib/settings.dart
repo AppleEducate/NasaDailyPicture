@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
 import 'package:share/share.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
