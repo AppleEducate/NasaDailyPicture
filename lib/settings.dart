@@ -7,9 +7,9 @@ import 'package:share/share.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class SettingsPage extends StatelessWidget {
-
   @override
   void initState() {}
+  bool pushNotifications = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,25 @@ class SettingsPage extends StatelessWidget {
           shrinkWrap: true,
           padding: const EdgeInsets.all(20.0),
           children: <Widget>[
-            new Text(
-              'Push Notifications?',
-              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-            ),
+            new Row(
+              children: <Widget>[
+                new Expanded(
+                  child: new Text(
+                    'Daily Image Notification?',
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16.0),
+                  ),
+                ),
+                new Switch(
+                  value: pushNotifications,
+                  onChanged: (bool value) {
+                    value == false
+                        ? pushNotifications = true
+                        : pushNotifications = false;
+                  },
+                ),
+              ],
+            )
           ],
         ));
   }

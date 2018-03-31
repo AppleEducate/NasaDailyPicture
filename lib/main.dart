@@ -6,7 +6,7 @@ import 'package:daily_nasa/globals.dart' as globals;
 import 'package:daily_nasa/imagedetails.dart';
 import 'package:daily_nasa/settings.dart';
 // import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() => runApp(new MyApp());
 
@@ -75,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
     _onRefresh();
   }
 
@@ -191,11 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: data == null
-          ? new Center(
-              child: new Text('No Pictures'),
-            )
-          : getTiles(data),
+      body: getTiles(data),
     );
   }
 }
