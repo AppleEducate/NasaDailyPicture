@@ -48,7 +48,9 @@ class ImageDetailsPage extends StatelessWidget {
               onTap: () { 
                 openImage(hdImageUrl);
                 },
-              child: new Image.network(
+              child: hdImageUrl.contains('youtube')
+              ? new Text('Video')
+              : new Image.network(
                 hdImageUrl,
               ),
             ),

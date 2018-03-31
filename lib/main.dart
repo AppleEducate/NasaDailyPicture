@@ -74,8 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
-    _onRefresh();
+    // _refreshIndicatorKey.currentState.show();
+    getData();
+    // _onRefresh();
   }
 
   Widget buildCellTile(int index, List data) {
@@ -150,9 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // count = count + 100;
             // getData();
           }
-          return data[index]["url"].toString().contains('youtube')
-              ? new Text('')
-              : new InkWell(
+          return new InkWell(
                   onTap: () {
                     globals.title = data[index]["title"];
                     globals.datecreated = data[index]["date"];
@@ -165,7 +164,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (context) => new ImageDetailsPage()),
                     );
                   },
-                  child: buildCellTile(index, data),
+                  child: data[index]["url"].toString().contains('youtube')
+              ? data.removeAt(index)
+              : buildCellTile(index, data),
                 );
         },
       ),
@@ -184,8 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(
-                    builder: (context) => new SettingsPage()),
+                new MaterialPageRoute(builder: (context) => new SettingsPage()),
               );
             },
           ),
