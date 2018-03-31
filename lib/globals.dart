@@ -12,7 +12,12 @@ String token = "";
 String domain = "";
 String apiURL = "https://reqres.in/api/users/2";
 String error = "";
+
+String title = '';
 String description = "";
+String imageurl = '';
+String hdimageurl = '';
+String datecreated = '';
 
 String id = "0";
 String firstname = "Test";

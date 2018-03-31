@@ -13,6 +13,7 @@
 		3B80C3941E831B6300D905FE /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B80C3931E831B6300D905FE /* App.framework */; };
 		3B80C3951E831B6300D905FE /* App.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B80C3931E831B6300D905FE /* App.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
+		77396F5C206F0652003583B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77396F5B206F0652003583B6 /* GoogleService-Info.plist */; };
 		9705A1C61CF904A100538489 /* Flutter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9740EEBA1CF902C7004384FC /* Flutter.framework */; };
 		9705A1C71CF904A300538489 /* Flutter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9740EEBA1CF902C7004384FC /* Flutter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9740EEB41CF90195004384FC /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9740EEB21CF90195004384FC /* Debug.xcconfig */; };
@@ -46,6 +47,8 @@
 		3B80C3931E831B6300D905FE /* App.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = App.framework; path = Flutter/App.framework; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		77396F5A206F022A003583B6 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
+		77396F5B206F0652003583B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
+				77396F5B206F0652003583B6 /* GoogleService-Info.plist */,
 				2D5378251FAA1A9400D5DBA9 /* flutter_assets */,
 				3B80C3931E831B6300D905FE /* App.framework */,
 				3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */,
@@ -116,6 +120,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				77396F5A206F022A003583B6 /* Runner.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -182,6 +187,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 9FK3425VTA;
 						LastSwiftMigration = 0910;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -209,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				77396F5C206F0652003583B6 /* GoogleService-Info.plist in Resources */,
 				9740EEB51CF90195004384FC /* Generated.xcconfig in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				9740EEB41CF90195004384FC /* Debug.xcconfig in Resources */,
@@ -261,11 +272,21 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh",
 				"${PODS_ROOT}/.symlinks/flutter/ios/Flutter.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/firebase_messaging/firebase_messaging.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/share/share.framework",
 				"${BUILT_PRODUCTS_DIR}/url_launcher/url_launcher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/firebase_messaging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/share.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/url_launcher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +467,7 @@
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				DEVELOPMENT_TEAM = 9FK3425VTA;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -458,7 +480,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.appleeducate.dailyNasa;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appleeducate.daily-nasa";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -474,6 +496,7 @@
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				DEVELOPMENT_TEAM = 9FK3425VTA;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -486,7 +509,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.appleeducate.dailyNasa;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appleeducate.daily-nasa";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;

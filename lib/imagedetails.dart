@@ -1,23 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
-
+import 'package:share/share.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ImageDetailsPage extends StatelessWidget {
-  String title = globals.firstname;
-  String hdImageUrl = globals.id;
-  String dateCreated = globals.lastname;
+  String title = globals.title;
+  String imageUrl = globals.imageurl;
+  String hdImageUrl = globals.hdimageurl;
+  String dateCreated = globals.datecreated;
   String description = globals.description;
 
   @override
   void initState() {}
 
-  Future openImage() async {
-    globals.Utility.launchURL(hdImageUrl);
+  Future openImage(String image) async {
+    globals.Utility.launchURL(image);
   }
 
   @override
@@ -25,6 +25,16 @@ class ImageDetailsPage extends StatelessWidget {
     return new Scaffold(
         appBar: new AppBar(
           title: new Text("Image Details"),
+          actions: <Widget>[
+          new IconButton(
+            // action button
+            icon: new Icon(Icons.share, size: 30.0, color: Colors.white),
+            onPressed: () {
+              share('Nasa Image: $title,\n\nDescription: $description\n\nImage: $hdImageUrl'); //True for Stock Camera
+            },
+          ),
+         
+        ],
         ),
         body: new ListView(
           shrinkWrap: true,
@@ -35,7 +45,9 @@ class ImageDetailsPage extends StatelessWidget {
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
             new InkWell(
-              onTap: openImage,
+              onTap: () { 
+                openImage(hdImageUrl);
+                },
               child: new Image.network(
                 hdImageUrl,
               ),

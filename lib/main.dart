@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
 import 'package:daily_nasa/imagedetails.dart';
-
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:daily_nasa/settings.dart';
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() => runApp(new MyApp());
 
@@ -56,7 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Future getData() async {
     // _reverse = true;
     // _refreshIndicatorKey.currentState?.show();
-     String result = "" + await globals.Utility.getData('https://api.nasa.gov/planetary/apod?', 'api_key=$apiKey&count=$count');
+    String result = "" +
+        await globals.Utility.getData('https://api.nasa.gov/planetary/apod?',
+            'api_key=$apiKey&count=$count');
     // String response = "" + await http.get(
     //     Uri.encodeFull(
     //         "https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
@@ -77,6 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildCellTile(int index, List data) {
+    String title = data[index]["title"];
+    String image = data[index]["url"];
+    String hdimage = data[index]["hdurl"];
+    String date = data[index]["date"];
     return new Card(
       elevation: 1.0,
       child: new Column(
@@ -86,24 +92,26 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           new Center(
               child: new Text(
-            data[index]["title"],
+            title,
             style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
             textAlign: TextAlign.center,
           )),
           new Expanded(
-            child: new Image.network(
-              data[index]["url"],
-              height: 65.0,
-              width: 65.0,
-              fit: BoxFit.fitHeight,
-            ),
+            child: image.contains('youtube')
+                ? new Text(hdimage)
+                : new Image.network(
+                    image,
+                    height: 65.0,
+                    width: 65.0,
+                    fit: BoxFit.fitHeight,
+                  ),
           ),
           new Container(
             height: 10.0,
           ),
           new Center(
               child: new Text(
-            data[index]["date"],
+            date,
             textAlign: TextAlign.center,
           )),
         ],
@@ -139,23 +147,26 @@ class _MyHomePageState extends State<MyHomePage> {
               data.length.toString() +
               ' / Count: $count');
           if (index + 1 == data.length && index + 1 == count) {
-            count = count + 100;
-            getData();
+            // count = count + 100;
+            // getData();
           }
-          return new InkWell(
-            onTap: () {
-              globals.firstname = data[index]["title"];
-              globals.lastname = data[index]["date"];
-              globals.id = data[index]["hdurl"];
-              globals.description = data[index]["explanation"];
-              Navigator.push(
-                context,
-                new MaterialPageRoute(
-                    builder: (context) => new ImageDetailsPage()),
-              );
-            },
-            child: buildCellTile(index, data),
-          );
+          return data[index]["url"].toString().contains('youtube')
+              ? new Text('')
+              : new InkWell(
+                  onTap: () {
+                    globals.title = data[index]["title"];
+                    globals.datecreated = data[index]["date"];
+                    globals.imageurl = data[index]["url"];
+                    globals.hdimageurl = data[index]["hdurl"];
+                    globals.description = data[index]["explanation"];
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new ImageDetailsPage()),
+                    );
+                  },
+                  child: buildCellTile(index, data),
+                );
         },
       ),
     );
@@ -166,8 +177,25 @@ class _MyHomePageState extends State<MyHomePage> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Daily NASA"),
+        actions: <Widget>[
+          new IconButton(
+            // action button
+            icon: new Icon(Icons.settings, size: 30.0, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => new SettingsPage()),
+              );
+            },
+          ),
+        ],
       ),
-      body: getTiles(data),
+      body: data == null
+          ? new Center(
+              child: new Text('No Pictures'),
+            )
+          : getTiles(data),
     );
   }
 }
