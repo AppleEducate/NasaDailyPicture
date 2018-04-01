@@ -53,8 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _reverse = false;
 
   Future getData() async {
+    //  _refreshIndicatorKey.currentState?.show();
     // _reverse = true;
-    // _refreshIndicatorKey.currentState?.show();
     String result = "" +
         await globals.Utility.getData('https://api.nasa.gov/planetary/apod?',
             'api_key=$apiKey&count=$count');
@@ -74,9 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    // _refreshIndicatorKey.currentState.show();
-    getData();
-    // _onRefresh();
+   getData();
   }
 
   Widget buildCellTile(int index, List data) {
@@ -152,22 +150,22 @@ class _MyHomePageState extends State<MyHomePage> {
             // getData();
           }
           return new InkWell(
-                  onTap: () {
-                    globals.title = data[index]["title"];
-                    globals.datecreated = data[index]["date"];
-                    globals.imageurl = data[index]["url"];
-                    globals.hdimageurl = data[index]["hdurl"];
-                    globals.description = data[index]["explanation"];
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => new ImageDetailsPage()),
-                    );
-                  },
-                  child: data[index]["url"].toString().contains('youtube')
-              ? data.removeAt(index)
-              : buildCellTile(index, data),
-                );
+            onTap: () {
+              globals.title = data[index]["title"];
+              globals.datecreated = data[index]["date"];
+              globals.imageurl = data[index]["url"];
+              globals.hdimageurl = data[index]["hdurl"];
+              globals.description = data[index]["explanation"];
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => new ImageDetailsPage()),
+              );
+            },
+            child: data[index]["url"].toString().contains('youtube')
+                ? data.removeAt(index)
+                : buildCellTile(index, data),
+          );
         },
       ),
     );
