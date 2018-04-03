@@ -13,9 +13,6 @@ class ImageDetailsPage extends StatelessWidget {
   String dateCreated = globals.datecreated;
   String description = globals.description;
 
-  @override
-  void initState() {}
-
   Future openImage(String image) async {
     globals.Utility.launchURL(image);
   }

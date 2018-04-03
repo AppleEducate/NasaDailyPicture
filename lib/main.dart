@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
 import 'package:daily_nasa/imagedetails.dart';
 import 'package:daily_nasa/settings.dart';
+import 'package:local_notifications/local_notifications.dart';
 // import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() => runApp(new MyApp());
@@ -64,17 +65,22 @@ class _MyHomePageState extends State<MyHomePage> {
     //     headers: {"Accept": "application/json"});
     // List items = JSON.decode(response.body);
     this.setState(() {
-      // data = items;
-      List decoded = JSON.decode(result);
-      // oldData = decoded['objects'];
-      data = decoded;
+      try {
+        List decoded = JSON.decode(result);
+        data = decoded;
+      } catch (ex) {
+        print(ex);
+      }
     });
+
+    // await LocalNotifications.createNotification(
+    //     title: "My First Notification", content: "SomeContent", id: 0);
   }
 
   @override
   void initState() {
     super.initState();
-   getData();
+    getData();
   }
 
   Widget buildCellTile(int index, List data) {
@@ -159,7 +165,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Navigator.push(
                 context,
                 new MaterialPageRoute(
-                    builder: (context) => new ImageDetailsPage()),
+                    builder: (context) => new ImageDetailsPage(),
+                    maintainState: true),
               );
             },
             child: data[index]["url"].toString().contains('youtube')
@@ -183,7 +190,9 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new SettingsPage()),
+                new MaterialPageRoute(
+                    builder: (context) => new SettingsPage(),
+                    maintainState: true),
               );
             },
           ),

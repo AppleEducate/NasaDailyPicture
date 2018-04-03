@@ -8,9 +8,19 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SettingsPage extends StatelessWidget {
+  final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
   @override
   void initState() {}
   bool pushNotifications = false;
+  void setAPNState(bool isOn) {
+    if (isOn) {
+      pushNotifications = false;
+    } else {
+      // _firebaseMessaging.requestNotificationPermissions();
+      // _firebaseMessaging.configure();
+      pushNotifications = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
