@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.blue,
         accentColor: Colors.redAccent,
-        primaryColorBrightness: Brightness.dark,
+        primaryColorBrightness: Brightness.light,
       ),
       home: new MyHomePage(),
     );
@@ -182,21 +182,22 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        backgroundColor: Colors.white,
         title: new Text("Daily NASA"),
-        actions: <Widget>[
-          new IconButton(
-            // action button
-            icon: new Icon(Icons.settings, size: 30.0, color: Colors.white),
-            onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(
-                    builder: (context) => new SettingsPage(),
-                    maintainState: true),
-              );
-            },
-          ),
-        ],
+        // actions: <Widget>[
+        //   new IconButton(
+        //     // action button
+        //     icon: new Icon(Icons.settings, size: 30.0, color: Colors.white),
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         new MaterialPageRoute(
+        //             builder: (context) => new SettingsPage(),
+        //             maintainState: true),
+        //       );
+        //     },
+        //   ),
+        // ],
       ),
       body: getTiles(data),
     );
