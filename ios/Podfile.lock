@@ -5,6 +5,9 @@ PODS:
   - Firebase/Messaging (4.8.0):
     - Firebase/Core
     - FirebaseMessaging (= 2.0.8)
+  - firebase_analytics (0.0.1):
+    - Firebase/Core
+    - Flutter
   - firebase_messaging (0.0.1):
     - Firebase/Core
     - Firebase/Messaging
@@ -30,6 +33,8 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
+  - image_picker (0.0.1):
+    - Flutter
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -42,16 +47,22 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - firebase_analytics (from `Pods/.symlinks/plugins/firebase_analytics-0.3.0/ios`)
   - firebase_messaging (from `Pods/.symlinks/plugins/firebase_messaging-0.2.1/ios`)
   - Flutter (from `Pods/.symlinks/flutter/ios`)
+  - image_picker (from `Pods/.symlinks/plugins/image_picker-0.1.1/ios`)
   - share (from `Pods/.symlinks/plugins/share-0.4.0/ios`)
   - url_launcher (from `Pods/.symlinks/plugins/url_launcher-3.0.0/ios`)
 
 EXTERNAL SOURCES:
+  firebase_analytics:
+    :path: Pods/.symlinks/plugins/firebase_analytics-0.3.0/ios
   firebase_messaging:
     :path: Pods/.symlinks/plugins/firebase_messaging-0.2.1/ios
   Flutter:
     :path: Pods/.symlinks/flutter/ios
+  image_picker:
+    :path: Pods/.symlinks/plugins/image_picker-0.1.1/ios
   share:
     :path: Pods/.symlinks/plugins/share-0.4.0/ios
   url_launcher:
@@ -59,6 +70,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
+  firebase_analytics: 38f3b57e9073fbf57dc6f3704ad993ce8ed509e8
   firebase_messaging: 9bb8e317daa678ff7f5c59887ea11eca518de21c
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
@@ -66,11 +78,12 @@ SPEC CHECKSUMS:
   FirebaseMessaging: dfdcd307c2382290a1e297a81d0f18370f5b1bcd
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  image_picker: a211f28b95a560433c00f5cd3773f4710a20404d
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   share: ee3d34d3969ad17fc3043eab552e4f082aacfed1
   url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
 
-PODFILE CHECKSUM: 70e69985f01fdaffe3180d3ae5e73472304a9371
+PODFILE CHECKSUM: 2b8c68eeddaf80fb22c6f653fa1da069ed04ef77
 
 COCOAPODS: 1.3.1

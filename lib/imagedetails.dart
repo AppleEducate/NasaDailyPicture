@@ -24,11 +24,12 @@ class ImageDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
+           backgroundColor: Colors.white,
           title: new Text("Image Details"),
           actions: <Widget>[
           new IconButton(
             // action button
-            icon: new Icon(Icons.share, size: 30.0, color: Colors.white),
+            icon: new Icon(Icons.share),
             onPressed: () {
               share('Nasa Image: $title,\n\nDescription: $description\n\nImage: $hdImageUrl'); //True for Stock Camera
             },
