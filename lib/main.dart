@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Daily Nasa',
       theme: new ThemeData(
-        primaryColor: Colors.black,
+        primaryColor: Colors.blue,
         accentColor: Colors.redAccent,
-        primaryColorBrightness: Brightness.light,
+        primaryColorBrightness: Brightness.dark,
       ),
       home: new MyHomePage(),
     );
@@ -64,12 +64,13 @@ class _MyHomePageState extends State<MyHomePage> {
     //         "https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
     //     headers: {"Accept": "application/json"});
     // List items = JSON.decode(response.body);
-
     this.setState(() {
       try {
         List decoded = JSON.decode(result);
         data = decoded;
-      } catch (ex) {}
+      } catch (ex) {
+        print(ex);
+      }
     });
 
     // await LocalNotifications.createNotification(
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-   _onRefresh();
+    getData();
   }
 
   Widget buildCellTile(int index, List data) {
@@ -181,22 +182,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        backgroundColor: Colors.white,
         title: new Text("Daily NASA"),
-        // actions: <Widget>[
-        //   new IconButton(
-        //     // action button
-        //     icon: new Icon(Icons.settings),
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         new MaterialPageRoute(
-        //             builder: (context) => new SettingsPage(),
-        //             maintainState: true),
-        //       );
-        //     },
-        //   ),
-        // ],
+        actions: <Widget>[
+          new IconButton(
+            // action button
+            icon: new Icon(Icons.settings, size: 30.0, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => new SettingsPage(),
+                    maintainState: true),
+              );
+            },
+          ),
+        ],
       ),
       body: getTiles(data),
     );

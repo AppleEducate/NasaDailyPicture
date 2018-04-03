@@ -6,12 +6,7 @@ dependencies:
   url_launcher: "^3.0.0"
   share: "^0.4.0"
   firebase_messaging: "^0.2.1"
-<<<<<<< HEAD
   local_notifications: any
-=======
-  image_picker: 0.1.1                                                                                     
-  firebase_analytics: "^0.3.0"                                       
->>>>>>> 09b42ac74a1f64559ef21c97f1891a2b0f87e479
   flutter:
     sdk: flutter
 
