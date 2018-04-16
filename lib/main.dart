@@ -64,14 +64,20 @@ class _MyHomePageState extends State<MyHomePage> {
     //         "https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
     //     headers: {"Accept": "application/json"});
     // List items = JSON.decode(response.body);
-    this.setState(() {
-      try {
-        List decoded = JSON.decode(result);
-        data = decoded;
-      } catch (ex) {
-        print(ex);
-      }
-    });
+    // this.setState(() {
+    //   try {
+    //     List decoded = JSON.decode(result);
+    //     data = decoded;
+    //   } catch (ex) {
+    //     print(ex);
+    //   }
+    // });
+    try {
+      List decoded = JSON.decode(result);
+      data = decoded;
+    } catch (ex) {
+      print(ex);
+    }
 
     // await LocalNotifications.createNotification(
     //     title: "My First Notification", content: "SomeContent", id: 0);
@@ -84,11 +90,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildCellTile(int index, List data) {
+   
     String title = data[index]["title"];
     String image = data[index]["url"];
     String hdimage = data[index]["hdurl"];
     String date = data[index]["date"];
-    return new Card(
+    return data == null ? new Center(
+      child: new Text('Data Not Found'),
+    ): new Card(
       elevation: 1.0,
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -180,6 +189,30 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var futureBuilder = new FutureBuilder(
+      future: getData(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return new Align(
+              child: new CircularProgressIndicator(),
+              alignment: FractionalOffset.center,
+            );
+
+          default:
+            if (snapshot.hasError)
+              return new Text('Error: ${snapshot.error}');
+            else
+              return data.length == 0
+                  ? new Center(
+                      child: new Text('No Images Found'),
+                    )
+                  : getTiles(data);
+        }
+      },
+    );
+
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.white,
@@ -199,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //   ),
         // ],
       ),
-      body: getTiles(data),
+      body: futureBuilder,
     );
   }
 }
