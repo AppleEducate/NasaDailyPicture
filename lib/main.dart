@@ -47,13 +47,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
+  ScrollController _myScrollController = new ScrollController();
 
   List data;
   String apiKey = "ecbPd1gAXph1ytyKAEUeu7KRB5xGEx5XOkB7Xoi4";
   int count = 100;
   bool _reverse = false;
+  bool isLoaded = false;
 
   Future getData() async {
+    isLoaded = false;
     //  _refreshIndicatorKey.currentState?.show();
     // _reverse = true;
     String result = "" +
@@ -64,125 +67,174 @@ class _MyHomePageState extends State<MyHomePage> {
     //         "https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
     //     headers: {"Accept": "application/json"});
     // List items = JSON.decode(response.body);
-    this.setState(() {
-      try {
-        List decoded = JSON.decode(result);
-        data = decoded;
-      } catch (ex) {
-        print(ex);
+    try {
+      List decoded = JSON.decode(result);
+      for (var row in decoded) {
+        // mData.add(row);
+        // mData.add(row);
+        // for (var item in row) {
+        //   // print("ROW => $item");
+        //   mData.add(item);
+        // }
+        addNewItem(row);
       }
-    });
+      data = decoded;
+    } catch (ex) {
+      print(ex);
+    }
 
     // await LocalNotifications.createNotification(
     //     title: "My First Notification", content: "SomeContent", id: 0);
+    isLoaded = true;
   }
+
+  void addNewItem(Map row) {
+    _items.add(
+      new InkWell(
+        onTap: () {
+          globals.title = row["title"];
+          globals.datecreated = row["date"];
+          globals.imageurl = row["url"];
+          globals.hdimageurl = row["hdurl"];
+          globals.description = row["explanation"];
+          Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (context) => new ImageDetailsPage(),
+                maintainState: true),
+          );
+        },
+        child: new Card(
+          elevation: 1.0,
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            verticalDirection: VerticalDirection.down,
+            children: <Widget>[
+              new Center(
+                  child: new Text(
+                row["title"],
+                style:
+                    new TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+                textAlign: TextAlign.center,
+              )),
+              new Expanded(
+                child: row["url"].contains('youtube')
+                    ? new Text(row["hdurl"])
+                    : new Image.network(
+                        row["url"],
+                        height: 65.0,
+                        width: 65.0,
+                        fit: BoxFit.fitHeight,
+                      ),
+              ),
+              new Container(
+                height: 10.0,
+              ),
+              new Center(
+                  child: new Text(
+                row["date"],
+                textAlign: TextAlign.center,
+              )),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void addAllItems(List newList, int oldLength, bool isSearching) {
+    if (isSearching) {
+      _items.clear();
+    }
+    int index = 0;
+    for (var row in newList) {
+      if (index > oldLength - 1) {
+        addNewItem(row);
+      }
+
+      index++;
+    }
+  }
+
+  List<Widget> _items = new List.generate(0, (index) {
+    return new Text("item $index");
+  });
 
   @override
   void initState() {
     super.initState();
-    getData();
-  }
-
-  Widget buildCellTile(int index, List data) {
-    String title = data[index]["title"];
-    String image = data[index]["url"];
-    String hdimage = data[index]["hdurl"];
-    String date = data[index]["date"];
-    return new Card(
-      elevation: 1.0,
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        verticalDirection: VerticalDirection.down,
-        children: <Widget>[
-          new Center(
-              child: new Text(
-            title,
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-            textAlign: TextAlign.center,
-          )),
-          new Expanded(
-            child: image.contains('youtube')
-                ? new Text(hdimage)
-                : new Image.network(
-                    image,
-                    height: 65.0,
-                    width: 65.0,
-                    fit: BoxFit.fitHeight,
-                  ),
-          ),
-          new Container(
-            height: 10.0,
-          ),
-          new Center(
-              child: new Text(
-            date,
-            textAlign: TextAlign.center,
-          )),
-        ],
-      ),
-    );
+    getData().then((result) {
+      setState(() {
+        print('Data Loaded');
+        // data = newData;
+      });
+    });
   }
 
   Future<Null> _onRefresh() {
     Completer<Null> completer = new Completer<Null>();
 
-    getData();
+    getData().then((result) {
+      setState(() {
+        print('Data Loaded');
+        // data = newData;
+      });
+    });
     completer.complete();
 
     return completer.future;
   }
 
-  Widget getTiles(List items) {
-    // print('Getting $tab Videos');
+  @override
+  Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     int axisCount =
         width <= 500.0 ? 2 : width <= 800.0 ? 3 : width <= 1100.0 ? 4 : 5;
-    return new RefreshIndicator(
+    Widget _list = new RefreshIndicator(
       key: _refreshIndicatorKey,
       onRefresh: _onRefresh,
-      child: new GridView.builder(
-        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: axisCount),
-        scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: items == null ? 0 : items.length,
-        itemBuilder: (BuildContext context, int index) {
-          print('Index: $index / Length: ' +
-              data.length.toString() +
-              ' / Count: $count');
-          if (index + 1 == data.length && index + 1 == count) {
-            // count = count + 100;
-            // getData();
-          }
-          return new InkWell(
-            onTap: () {
-              globals.title = data[index]["title"];
-              globals.datecreated = data[index]["date"];
-              globals.imageurl = data[index]["url"];
-              globals.hdimageurl = data[index]["hdurl"];
-              globals.description = data[index]["explanation"];
-              Navigator.push(
-                context,
-                new MaterialPageRoute(
-                    builder: (context) => new ImageDetailsPage(),
-                    maintainState: true),
-              );
-            },
-            child: data[index]["url"].toString().contains('youtube')
-                ? data.removeAt(index)
-                : buildCellTile(index, data),
-          );
-        },
-      ),
+      child: _items.length == 0 && !isLoaded
+          ? new Align(
+              child: new CircularProgressIndicator(),
+              alignment: FractionalOffset.center,
+            )
+          : new GridView.builder(
+              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: axisCount),
+              scrollDirection: Axis.vertical,
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: _items == null ? 0 : _items.length,
+              itemBuilder: (BuildContext context, int index) {
+                // print('Index: $index => Count: $count');
+                if (index == count - 1) {
+                  // _loadMoreItems();
+                }
+                return _items.length == 0
+                    ? new Center(
+                        child: new Text('No Images Found'),
+                      )
+                    : _items[index];
+              },
+              reverse: _reverse,
+            ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.white,
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.refresh),
+            onPressed: () {
+              getData().then((result) {
+                setState(() {
+                  print('Data Loaded');
+                  // data = newData;
+                });
+              });
+            },
+          )
+        ],
         title: new Text("Daily NASA"),
         // actions: <Widget>[
         //   new IconButton(
@@ -199,7 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //   ),
         // ],
       ),
-      body: getTiles(data),
+      body: _list,
     );
   }
 }
