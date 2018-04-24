@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:get_version/get_version.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Stateful widget for managing name data
 class HelpPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class HelpPage extends StatefulWidget {
 
 // State for managing fetching name data over HTTP
 class _HelpPageState extends State<HelpPage> {
-   String _platformVersion = 'Unknown';
+  String _platformVersion = 'Unknown';
   String _projectVersion = 'Unknown';
   String _projectCode = 'Unknown';
 
@@ -111,9 +112,6 @@ class _HelpPageState extends State<HelpPage> {
     };
   }
 
-
-  String supportWeb = 'http://appleeducate.com';
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -127,20 +125,20 @@ class _HelpPageState extends State<HelpPage> {
             new Container(
               height: 10.0,
             ),
-             new ListTile(
-              leading: new Icon(Icons.developer_mode),
+            new ListTile(
+              leading: new Icon(FontAwesomeIcons.github),
               title: const Text('Github'),
               subtitle: new Text('@AppleEducate'),
               onTap: () {
-                globals.Utility.launchURL('https://www.github.com/appleeducate');
+                globals.Utility
+                    .launchURL('https://www.github.com/appleeducate');
               },
             ),
             new Divider(
               height: 20.0,
             ),
-           
-               new ListTile(
-              leading: new Icon(Icons.share),
+            new ListTile(
+              leading: new Icon(FontAwesomeIcons.twitter),
               title: const Text('Twitter'),
               subtitle: new Text('@RodyDavis'),
               onTap: () {
@@ -150,18 +148,18 @@ class _HelpPageState extends State<HelpPage> {
             new Divider(
               height: 20.0,
             ),
-              new ListTile(
-              leading: new Icon(Icons.contacts),
+            new ListTile(
+              leading: new Icon(FontAwesomeIcons.facebook),
               title: const Text('Facebook'),
               subtitle: new Text('@RodyDavis'),
               onTap: () {
                 globals.Utility.launchURL('https://www.facebook.com/rodydavis');
               },
             ),
-             new Divider(
+            new Divider(
               height: 20.0,
             ),
-              new ListTile(
+            new ListTile(
               leading: new Icon(Icons.apps),
               title: const Text('Apps'),
               subtitle: new Text('by Rody Davis'),
@@ -172,7 +170,7 @@ class _HelpPageState extends State<HelpPage> {
             new Divider(
               height: 20.0,
             ),
-              new ListTile(
+            new ListTile(
               leading: new Icon(Icons.contact_mail),
               title: const Text('Contact'),
               subtitle: new Text('Submit Issues and Questions'),
@@ -183,15 +181,23 @@ class _HelpPageState extends State<HelpPage> {
             new Divider(
               height: 20.0,
             ),
-         
+            new ListTile(
+              leading: new Icon(FontAwesomeIcons.spaceShuttle),
+              title: const Text('NASA'),
+              subtitle: new Text('All Images provided by API'),
+              onTap: () {
+                globals.Utility.launchURL('https://api.nasa.gov/');
+              },
+            ),
+            new Divider(
+              height: 20.0,
+            ),
             new ListTile(
               leading: new Icon(Icons.info),
               title: const Text('Version'),
               subtitle: new Text('$_projectVersion ($_projectCode)'),
               trailing: new Text('$_platformVersion'),
             ),
-           
-    
           ],
         ),
       ),

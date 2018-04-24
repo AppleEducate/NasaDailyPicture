@@ -19,20 +19,22 @@ class ImageDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String content =
+        hdImageUrl == null ? imageUrl == null ? "" : imageUrl : hdImageUrl;
     return new Scaffold(
         appBar: new AppBar(
           backgroundColor: Colors.white,
           title: new Text("Image Details"),
           actions: <Widget>[
-          new IconButton(
-            // action button
-            icon: new Icon(Icons.share),
-            onPressed: () {
-              share('Nasa Image: $title,\n\nDescription: $description\n\nImage: $hdImageUrl'); //True for Stock Camera
-            },
-          ),
-         
-        ],
+            new IconButton(
+              // action button
+              icon: new Icon(Icons.share),
+              onPressed: () {
+                share(
+                    'Nasa Image: $title,\n\nDescription: $description\n\nImage: $hdImageUrl'); //True for Stock Camera
+              },
+            ),
+          ],
         ),
         body: new ListView(
           shrinkWrap: true,
@@ -43,12 +45,26 @@ class ImageDetailsPage extends StatelessWidget {
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
             new InkWell(
-              onTap: () { 
-                openImage(hdImageUrl);
-                },
-              child: new Image.network(
-                hdImageUrl,
-              ),
+              onTap: () {
+                openImage(content);
+              },
+              child: content.isEmpty || content == null
+                  ? new Center(
+                      child: new Icon(
+                        Icons.broken_image,
+                        size: 100.0,
+                      ),
+                    )
+                  : content.contains('youtube')  || content.contains('vimeo')
+                      ? new Center(
+                          child: new Icon(
+                            Icons.ondemand_video,
+                            size: 100.0,
+                          ),
+                        )
+                      : new Image.network(
+                          content,
+                        ),
             ),
             new Text(
               description,

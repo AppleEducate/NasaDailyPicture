@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/cupertino.dart';
 
 //Variables
 bool isLoggedIn = false;
@@ -26,31 +27,59 @@ String avatar =
     "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg";
 
 class Utility {
-  static Future<Null> showAlertPopup(BuildContext context, String title,
-      String detail1, String detail2) async {
-    return showDialog<Null>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      child: new AlertDialog(
-        title: new Text(title),
-        content: new SingleChildScrollView(
-          child: new ListBody(
-            children: <Widget>[
-              new Text(detail1),
-              new Text(detail2),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          new FlatButton(
-            child: new Text('Done'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
-    );
+  static Future<Null> showAlertPopup(
+      BuildContext context, String title, String detail) async {
+    void showDemoDialog<T>({BuildContext context, Widget child}) {
+      showDialog<T>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => child,
+      ).then<void>((T value) {
+        // The value passed to Navigator.pop() or null.
+        if (value != null) {
+          // _scaffoldKey.currentState.showSnackBar(new SnackBar(
+          //   content: new Text('You selected: $value')
+          // ));
+        }
+      });
+    }
+
+    return showDemoDialog<Null>(
+        context: context,
+        child: Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: new Text(title),
+                content: new Text(detail),
+                actions: <Widget>[
+                    // new CupertinoDialogAction(
+                    //     child: const Text('Discard'),
+                    //     isDestructiveAction: true,
+                    //     onPressed: () {
+                    //       Navigator.pop(context, 'Discard');
+                    //     }),
+                    new CupertinoDialogAction(
+                        child: const Text('Ok'),
+                        isDefaultAction: true,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
+                  ])
+            : new AlertDialog(
+                title: new Text(title),
+                content: new Text(
+                  detail,
+                ),
+                actions: <Widget>[
+                    new FlatButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
+                    // new FlatButton(
+                    //   child: const Text('DISCARD'),
+                    //   onPressed: () { Navigator.pop(context, DialogDemoAction.discard); }
+                    // )
+                  ]));
   }
 
   static Future<String> getData(String api, String headers) async {
@@ -81,7 +110,7 @@ class Utility {
             'Error getting IP address:\nHttp status ${response.statusCode}';
       }
     } catch (exception) {
-      result = 'Failed getting IP address';
+      result = 'Failed getting IP address $exception';
     }
     print("Result: " + result);
     return result;

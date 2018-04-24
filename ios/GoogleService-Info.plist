@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>145654029756-47m5ah4mklnd2j5a826kr6mf1k1gqmb5.apps.googleusercontent.com</string>
+	<string>145654029756-nhv7gfbcqv1jjftd0rkn0pfjjcdkk50q.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.145654029756-47m5ah4mklnd2j5a826kr6mf1k1gqmb5</string>
+	<string>com.googleusercontent.apps.145654029756-nhv7gfbcqv1jjftd0rkn0pfjjcdkk50q</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDyuoLbc9lP8ULY9KW3rJT1bhoJ5uzufX4</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.appleeducate.daily-nasa</string>
+	<string>com.appleeducate.dailynasa</string>
 	<key>PROJECT_ID</key>
 	<string>daily-nasa</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:145654029756:ios:ad596eda0b208a52</string>
+	<string>1:145654029756:ios:241965df084c8e89</string>
 	<key>DATABASE_URL</key>
 	<string>https://daily-nasa.firebaseio.com</string>
 </dict>
