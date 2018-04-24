@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
 import 'package:daily_nasa/imagedetails.dart';
 import 'package:daily_nasa/settings.dart';
+// import 'package:admob/admob.dart';
+import 'package:flutter/services.dart';
 // import 'package:local_notifications/local_notifications.dart';
 import 'help.dart';
 // import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';import 'package:firebase_messaging/firebase_messaging.dart';
@@ -55,6 +57,16 @@ class _MyHomePageState extends State<MyHomePage> {
   int count = 100;
   bool _reverse = false;
   bool isLoaded = false;
+
+  var _showInterstitialResponse = "";
+  var _loadInterstitialResponse = "";
+  var _BannerState = "";
+
+  String APP_ID = "ca-app-pub-9929690287684724~2116069294";
+  String INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-9929690287684724/7809349294";
+  String DEVICE_ID = "FF18F6CCC658F56ECA4C4623DB5082CA";
+  bool TESTING = true;
+  String PLACEMENT = "Top";
 
   Future getData() async {
     isLoaded = false;
@@ -164,6 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         print('Data Loaded');
         // data = newData;
+       // showInterstitialAd();
       });
     });
     completer.complete();
@@ -178,6 +191,58 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+// loadInterstitialAd() async {
+//     String loadResponse = "";
+//     try {
+//       loadResponse = await Admob.loadInterstitial(APP_ID, INTERSTITIAL_AD_UNIT_ID, DEVICE_ID, TESTING);
+//     } on PlatformException {
+//       loadResponse = "Failed to Load";
+//     }
+//     setState(() {
+//       _loadInterstitialResponse = loadResponse;
+//     });
+//   }
+  
+
+//   showInterstitialAd() async {
+//     var showResponse = "";
+//     try {
+//       showResponse = await Admob.showInterstitial;
+//     } on PlatformException {
+//       showResponse = 'false';
+//     }
+//     setState(() {
+//       _showInterstitialResponse = showResponse;
+//     });
+//   }
+
+//   showBannerAd() async {
+//     var showResponse = "";
+//     try {showResponse = await Admob.showBanner(APP_ID, INTERSTITIAL_AD_UNIT_ID, DEVICE_ID, TESTING, PLACEMENT);}
+//     on PlatformException {showResponse = "Not Shown";}
+
+//     setState(() {
+//       _BannerState = showResponse;
+//     });
+//   }
+
+//   closeBannerAd() async {
+//     var showResponse = "";
+//     try {
+//       _BannerState = await Admob.closeBanner();
+//       print(_BannerState);
+//     } on PlatformException {
+//       showResponse = "Not Closed";
+//     }
+//     setState(() {
+//       _BannerState = showResponse;
+//     });
+//   }
+
+
+//   final List<String> items = ['Interstitial','Top Banner', 'Bottom Banner'].toList();
+//   String _selection = "Interstitial";
+  
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

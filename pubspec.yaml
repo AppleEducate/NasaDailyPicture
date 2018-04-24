@@ -8,6 +8,7 @@ dependencies:
   # firebase_messaging: "^0.2.1"
   # local_notifications: any
   device_info: "^0.2.0"
+  # admob: "^0.1.27"
   get_version:
     git:
       url: git://github.com/AppleEducate/get_version
