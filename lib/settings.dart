@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
 import 'package:share/share.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SettingsPage extends StatelessWidget {
-  final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
+  // final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
   @override
   void initState() {}
   bool pushNotifications = false;

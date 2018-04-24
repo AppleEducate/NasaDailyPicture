@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
 import 'package:daily_nasa/imagedetails.dart';
 import 'package:daily_nasa/settings.dart';
-import 'package:local_notifications/local_notifications.dart';
+// import 'package:local_notifications/local_notifications.dart';
+import 'help.dart';
 // import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() => runApp(new MyApp());
@@ -57,34 +58,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future getData() async {
     isLoaded = false;
-    //  _refreshIndicatorKey.currentState?.show();
-    // _reverse = true;
     String result = "" +
         await globals.Utility.getData('https://api.nasa.gov/planetary/apod?',
             'api_key=$apiKey&count=$count');
-    // String response = "" + await http.get(
-    //     Uri.encodeFull(
-    //         "https://api.nasa.gov/planetary/apod?api_key=$apiKey&count=$count"),
-    //     headers: {"Accept": "application/json"});
-    // List items = JSON.decode(response.body);
     try {
       List decoded = JSON.decode(result);
       for (var row in decoded) {
-        // mData.add(row);
-        // mData.add(row);
-        // for (var item in row) {
-        //   // print("ROW => $item");
-        //   mData.add(item);
-        // }
         addNewItem(row);
       }
       data = decoded;
     } catch (ex) {
       print(ex);
     }
-
-    // await LocalNotifications.createNotification(
-    //     title: "My First Notification", content: "SomeContent", id: 0);
     isLoaded = true;
   }
 
@@ -186,6 +171,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return completer.future;
   }
 
+  void goToAbout() {
+     Navigator.push(
+      context,
+      new MaterialPageRoute(builder: (context) => new HelpPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -223,6 +215,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         backgroundColor: Colors.white,
         actions: <Widget>[
+          new IconButton(icon: new Icon(Icons.info),
+          onPressed: goToAbout,),
           new IconButton(
             icon: new Icon(Icons.refresh),
             onPressed: () {
@@ -233,23 +227,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               });
             },
-          )
+          ),
+          
         ],
         title: new Text("Daily NASA"),
-        // actions: <Widget>[
-        //   new IconButton(
-        //     // action button
-        //     icon: new Icon(Icons.settings, size: 30.0, color: Colors.white),
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         new MaterialPageRoute(
-        //             builder: (context) => new SettingsPage(),
-        //             maintainState: true),
-        //       );
-        //     },
-        //   ),
-        // ],
+  
       ),
       body: _list,
     );

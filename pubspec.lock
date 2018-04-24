@@ -85,13 +85,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1"
-  firebase_messaging:
+  device_info:
     dependency: "direct main"
     description:
-      name: firebase_messaging
+      name: device_info
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "0.2.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -116,6 +116,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0-alpha.9"
+  get_version:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "38c89f9cb4906651f557aa65aabfa49b8ad78f57"
+      url: "git://github.com/AppleEducate/get_version"
+    source: git
+    version: "0.0.1"
   glob:
     dependency: transitive
     description:
@@ -179,13 +188,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0-alpha.9"
-  local_notifications:
-    dependency: "direct main"
-    description:
-      name: local_notifications
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1"
   logging:
     dependency: transitive
     description:
@@ -249,13 +251,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.1"
-  platform:
-    dependency: transitive
-    description:
-      name: platform
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.2"
   plugin:
     dependency: transitive
     description:
