@@ -69,11 +69,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future getData() async {
     isLoaded = false;
-    String result = "" +
+    String result = "";
+    result = "" +
         await globals.Utility.getData('https://api.nasa.gov/planetary/apod?',
             'api_key=$apiKey&count=$count');
     // print('Result: $result');
-
+    if (result.contains('Error')) {
+      result = "" +
+          await globals.Utility.getData('https://api.nasa.gov/planetary/apod?',
+              'api_key=$apiKey&count=$count');
+      if (result.contains('Error')) {
+        result = "" +
+            await globals.Utility.getData(
+                'https://api.nasa.gov/planetary/apod?',
+                'api_key=$apiKey&count=$count');
+      }
+    }
     try {
       if (result.contains('Error')) {
         // _scaffoldKey.currentState.showSnackBar(new SnackBar(
@@ -283,7 +294,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool firstBottom = true;
 
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -313,7 +323,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       // _loadMoreItems();
                       firstBottom = false;
                       showFullAd();
-                      
                     }
                     return _items[index];
                   },
@@ -332,14 +341,8 @@ class _MyHomePageState extends State<MyHomePage> {
           new IconButton(
             icon: new Icon(Icons.refresh),
             onPressed: () {
-              showFullAd();
-              _items.clear();
-              getData().then((result) {
-                setState(() {
-                  print('Data Loaded');
-                  // data = newData;
-                });
-              });
+              _refreshIndicatorKey.currentState?.show();
+              _onRefresh();
             },
           ),
         ],
