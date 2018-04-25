@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'help.dart';
 // import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_admob/firebase_admob.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 const String testDevice = 'YOUR_DEVICE_ID';
 const String iosAdmobAppID = "ca-app-pub-7837488287280985~4079769179";
@@ -69,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _reverse = false;
   bool isLoaded = false;
   bool isDebug = false;
+  int hitCount = 0;
 
   Future getData() async {
     isLoaded = false;
@@ -199,7 +201,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   BannerAd createBannerAd() {
     return new BannerAd(
-      adUnitId: isDebug ? BannerAd.testAdUnitId : Platform.isIOS ? iosBannerAd : androidBannerAd,
+      adUnitId: isDebug
+          ? BannerAd.testAdUnitId
+          : Platform.isIOS ? iosBannerAd : androidBannerAd,
       size: AdSize.banner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
@@ -210,7 +214,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   InterstitialAd createInterstitialAd() {
     return new InterstitialAd(
-      adUnitId: isDebug ? InterstitialAd.testAdUnitId : Platform.isIOS ? iosFullAd : androidFullAd,
+      adUnitId: isDebug
+          ? InterstitialAd.testAdUnitId
+          : Platform.isIOS ? iosFullAd : androidFullAd,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
         print("InterstitialAd event $event");
@@ -221,14 +227,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    FirebaseAdMob.instance
-        .initialize(appId: isDebug ? FirebaseAdMob.testAppId : Platform.isIOS ? iosAdmobAppID : androidAdmobAppID);
+    FirebaseAdMob.instance.initialize(
+        appId: isDebug
+            ? FirebaseAdMob.testAppId
+            : Platform.isIOS ? iosAdmobAppID : androidAdmobAppID);
     _bannerAd = createBannerAd()
       ..load()
       ..show();
     _interstitialAd = createInterstitialAd()..load();
 
-   
     getData().then((result) {
       setState(() {
         print('Data Loaded');
@@ -275,12 +282,17 @@ class _MyHomePageState extends State<MyHomePage> {
       ..show();
   }
 
+
   void showFullAd() {
-    print('New Full Screen Ad Shown');
-    _interstitialAd?.dispose();
-    _interstitialAd = createInterstitialAd()
-      ..load()
-      ..show();
+    if (hitCount.isEven) {
+       print('New Full Screen Ad Shown');
+      _interstitialAd?.dispose();
+      _interstitialAd = createInterstitialAd()
+        ..load()
+        ..show();
+    }
+    print("Hits: $hitCount");
+    hitCount++;
   }
 
   void goToAbout() {
