@@ -16,6 +16,10 @@ import 'package:firebase_admob/firebase_admob.dart';
 const String testDevice = 'YOUR_DEVICE_ID';
 const String iosAdmobAppID = "ca-app-pub-7837488287280985~4079769179";
 const String androidAdmobAppID = "ca-app-pub-7837488287280985~7248645342";
+const String iosBannerAd = 'ca-app-pub-7837488287280985/3391651263';
+const String iosFullAd = 'ca-app-pub-7837488287280985/9162852696';
+const String androidBannerAd = 'ca-app-pub-7837488287280985/3718954322';
+const String androidFullAd = 'ca-app-pub-7837488287280985/8396565931';
 
 void main() => runApp(new MyApp());
 
@@ -64,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int count = 100;
   bool _reverse = false;
   bool isLoaded = false;
-  String appIDAds = "";
   bool isDebug = false;
 
   Future getData() async {
@@ -196,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   BannerAd createBannerAd() {
     return new BannerAd(
-      adUnitId: BannerAd.testAdUnitId,
+      adUnitId: isDebug ? BannerAd.testAdUnitId : Platform.isIOS ? iosBannerAd : androidBannerAd,
       size: AdSize.banner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
@@ -207,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   InterstitialAd createInterstitialAd() {
     return new InterstitialAd(
-      adUnitId: InterstitialAd.testAdUnitId,
+      adUnitId: isDebug ? InterstitialAd.testAdUnitId : Platform.isIOS ? iosFullAd : androidFullAd,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
         print("InterstitialAd event $event");
@@ -218,15 +221,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    appIDAds = Platform.isIOS ? iosAdmobAppID : androidAdmobAppID;
     FirebaseAdMob.instance
-        .initialize(appId: isDebug ? FirebaseAdMob.testAppId : appIDAds);
+        .initialize(appId: isDebug ? FirebaseAdMob.testAppId : Platform.isIOS ? iosAdmobAppID : androidAdmobAppID);
     _bannerAd = createBannerAd()
       ..load()
       ..show();
     _interstitialAd = createInterstitialAd()..load();
 
-    print('AddID: $appIDAds');
+   
     getData().then((result) {
       setState(() {
         print('Data Loaded');
