@@ -188,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
   });
 
   static final MobileAdTargetingInfo targetingInfo = new MobileAdTargetingInfo(
-    testDevices: testDevice != null ? <String>[testDevice] : null,
+    // testDevices: testDevice != null ? <String>[testDevice] : null,
     keywords: <String>['foo', 'bar'],
     contentUrl: 'http://foo.com/bar.html',
     birthday: new DateTime.now(),

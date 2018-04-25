@@ -117,7 +117,7 @@ class _HelpPageState extends State<HelpPage> {
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.white,
-        title: new Text("Help"),
+        title: new Text("Info"),
       ),
       body: new SingleChildScrollView(
         child: new ListBody(
