@@ -50,6 +50,7 @@
 				<true/>
 			</dict>
 			<key>myunifycrm.com</key>
+			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 				<key>NSIncludesSubdomains</key>
