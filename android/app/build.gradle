@@ -35,7 +35,7 @@ android {
         applicationId "com.appleeducate.dailynasa"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 105
+        versionCode 107
         versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
