@@ -118,6 +118,10 @@ class _MyHomePageState extends State<MyHomePage> {
         : row["hdurl"];
     _items.add(
       new InkWell(
+        onLongPress: () {
+          String image = row["hdurl"] == null ? row["url"] : row["hdurl"];
+          globals.Utility.launchURL(image);
+        },
         onTap: () {
           showFullAd();
           globals.title = row["title"];
@@ -282,10 +286,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ..show();
   }
 
-
   void showFullAd() {
     if (hitCount.isEven) {
-       print('New Full Screen Ad Shown');
+      print('New Full Screen Ad Shown');
       _interstitialAd?.dispose();
       _interstitialAd = createInterstitialAd()
         ..load()

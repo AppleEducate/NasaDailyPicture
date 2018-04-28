@@ -17,10 +17,10 @@ PODS:
   - FirebaseAnalytics (4.2.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
   - FirebaseCore (4.0.20):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseInstanceID (2.0.10):
     - FirebaseCore (~> 4.0)
   - Flutter (1.0.0)
@@ -28,7 +28,7 @@ PODS:
     - Flutter
   - Google-Mobile-Ads-SDK (7.30.0)
   - GoogleToolboxForMac/Defines (2.1.4)
-  - GoogleToolboxForMac/NSData+zlib (2.1.4):
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -41,29 +41,39 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - device_info (from `Pods/.symlinks/plugins/device_info-0.2.0/ios`)
-  - firebase_admob (from `Pods/.symlinks/plugins/firebase_admob-0.5.3/ios`)
-  - firebase_core (from `Pods/.symlinks/plugins/firebase_core-0.2.3/ios`)
+  - device_info (from `Pods/.symlinks/plugins/device_info/ios`)
+  - firebase_admob (from `Pods/.symlinks/plugins/firebase_admob/ios`)
+  - firebase_core (from `Pods/.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Pods/.symlinks/flutter/ios-release`)
-  - get_version (from `Pods/.symlinks/plugins/get_version-38c89f9cb4906651f557aa65aabfa49b8ad78f57/ios`)
-  - share (from `Pods/.symlinks/plugins/share-0.4.0/ios`)
-  - url_launcher (from `Pods/.symlinks/plugins/url_launcher-3.0.0/ios`)
+  - get_version (from `Pods/.symlinks/plugins/get_version/ios`)
+  - share (from `Pods/.symlinks/plugins/share/ios`)
+  - url_launcher (from `Pods/.symlinks/plugins/url_launcher/ios`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - Google-Mobile-Ads-SDK
+    - GoogleToolboxForMac
+    - nanopb
 
 EXTERNAL SOURCES:
   device_info:
-    :path: Pods/.symlinks/plugins/device_info-0.2.0/ios
+    :path: Pods/.symlinks/plugins/device_info/ios
   firebase_admob:
-    :path: Pods/.symlinks/plugins/firebase_admob-0.5.3/ios
+    :path: Pods/.symlinks/plugins/firebase_admob/ios
   firebase_core:
-    :path: Pods/.symlinks/plugins/firebase_core-0.2.3/ios
+    :path: Pods/.symlinks/plugins/firebase_core/ios
   Flutter:
     :path: Pods/.symlinks/flutter/ios-release
   get_version:
-    :path: Pods/.symlinks/plugins/get_version-38c89f9cb4906651f557aa65aabfa49b8ad78f57/ios
+    :path: Pods/.symlinks/plugins/get_version/ios
   share:
-    :path: Pods/.symlinks/plugins/share-0.4.0/ios
+    :path: Pods/.symlinks/plugins/share/ios
   url_launcher:
-    :path: Pods/.symlinks/plugins/url_launcher-3.0.0/ios
+    :path: Pods/.symlinks/plugins/url_launcher/ios
 
 SPEC CHECKSUMS:
   device_info: 76ce0b32e13034d1883be4a382433648f9dcee63
@@ -81,6 +91,6 @@ SPEC CHECKSUMS:
   share: 8d04605548e55f7ce4ebb7b3e933f3c85028c9cf
   url_launcher: 92b89c1029a0373879933c21642958c874539095
 
-PODFILE CHECKSUM: 70e69985f01fdaffe3180d3ae5e73472304a9371
+PODFILE CHECKSUM: ea0518673586564c605fb6593d385c0e3708ff8d
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
