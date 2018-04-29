@@ -20,10 +20,21 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     increment_build_number
+    # sh 'fastlane deliver download_metadata && fastlane deliver download_screenshots'
     get_certificates          
     get_provisioning_profile   
-    build_app
-    upload_to_testflight
+    sh 'cd ~/Projects/daily_nasa/ && flutter build ios'
+    # build_app
+    sh "cd ~/Projects/daily_nasa/ios/ && open Runner.xcworkspace"
+        # Build and archive the app again.
+    # build_ios_app(
+    #   workspace: 'Runner.xcworkspace',
+    #   scheme: 'Runner',
+    #   # export_method: 'app-store',
+    #   # Verify that the right signing identity is used for publishing.
+    #   # codesigning_identity: 'iPhone Distribution: Store Ladd (S8QB4VV633)',
+    # )
+    # upload_to_testflight
   end
 
   desc "Push a new release build to the App Store"

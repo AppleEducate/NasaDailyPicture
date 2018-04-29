@@ -10,3 +10,6 @@ packages
 .flutter-plugins
 *.json
 *.jks
+*.ipa
+*.zip
+*.ipa
