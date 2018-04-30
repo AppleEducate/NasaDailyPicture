@@ -2,15 +2,18 @@ name: daily_nasa
 description: Daily Pic Nasa.
 
 dependencies:
-  flutter_staggered_grid_view: "^0.1.2"
   url_launcher: "^3.0.0"
   share: "^0.4.0"
   # firebase_messaging: "^0.2.1"
   # local_notifications: any
   device_info: "^0.2.0"
   # admob: "^0.1.27"
-  firebase_admob: "^0.5.3"
+  # firebase_admob: "^0.5.3"
   firebase_core: "^0.2.3"
+  firebase_analytics: "^0.3.0"
+  firebase_admob: ^0.5.0
+  cloud_firestore: "^0.6.2"
+  firebase_database: ^0.4.4
   font_awesome_flutter: 6.0.0
   firebase: '^4.3.0'
   get_version:

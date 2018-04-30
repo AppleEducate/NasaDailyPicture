@@ -30,7 +30,7 @@ platform :ios do
     # build_ios_app(
     #   workspace: 'Runner.xcworkspace',
     #   scheme: 'Runner',
-    #   # export_method: 'app-store',
+    #   export_method: 'app-store',
     #   # Verify that the right signing identity is used for publishing.
     #   # codesigning_identity: 'iPhone Distribution: Store Ladd (S8QB4VV633)',
     # )

@@ -1,17 +1,19 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
 import 'package:share/share.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class ImageDetailsPage extends StatelessWidget {
-  String title = globals.title;
-  String imageUrl = globals.imageurl;
-  String hdImageUrl = globals.hdimageurl;
-  String dateCreated = globals.datecreated;
-  String description = globals.description;
+class ImageDetailsPage extends StatefulWidget {
+  @override
+  _ImageDetailsPageState createState() => new _ImageDetailsPageState();
+}
+
+class _ImageDetailsPageState extends State<ImageDetailsPage> {
+   String title = globals.title;
+   String imageUrl = globals.imageurl;
+   String hdImageUrl = globals.hdimageurl;
+   String dateCreated = globals.datecreated;
+   String description = globals.description;
 
   Future openImage(String image) async {
     globals.Utility.launchURL(image);
@@ -55,7 +57,7 @@ class ImageDetailsPage extends StatelessWidget {
                         size: 100.0,
                       ),
                     )
-                  : content.contains('youtube')  || content.contains('vimeo')
+                  : content.contains('youtube') || content.contains('vimeo')
                       ? new Center(
                           child: new Icon(
                             Icons.ondemand_video,

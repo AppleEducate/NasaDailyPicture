@@ -100,7 +100,7 @@ class Utility {
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         try {
-          var json = await response.transform(UTF8.decoder).join();
+          var json = await response.transform(utf8.decoder).join();
           result = json;
         } catch (exception) {
           result = 'Error Getting Data';

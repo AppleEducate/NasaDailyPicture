@@ -2,17 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:daily_nasa/globals.dart' as globals;
 import 'package:daily_nasa/imagedetails.dart';
-import 'package:daily_nasa/settings.dart';
-// import 'package:admob/admob.dart';
-import 'package:flutter/services.dart';
-// import 'package:local_notifications/local_notifications.dart';
 import 'help.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_admob/firebase_admob.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 const String testDevice = 'YOUR_DEVICE_ID';
 const String iosAdmobAppID = "ca-app-pub-7837488287280985~4079769179";
@@ -61,7 +54,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
-  ScrollController _myScrollController = new ScrollController();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List data;
