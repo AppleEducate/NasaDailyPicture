@@ -1,7 +1,7 @@
 # Daily Nasa
 
 ## Description
-Find the Image of the Day, Explore beautiful pictures of space and share with friends discoveries and important facts. 
+Find the Image of the Day, Explore beautiful pictures of space and share with friends discoveries and important facts. Built with Flutter.
 
 - Download Beautiful High-Resolution Photos of all around the Galaxy
 - Share with Friends
