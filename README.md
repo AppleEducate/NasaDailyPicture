@@ -1,13 +1,16 @@
-# NasaDailyPicture
+# Daily Nasa
 
-Uses Nasa API: https://api.nasa.gov/index.html#getting-started
+## Description
+Find the Image of the Day, Explore beautiful pictures of space and share with friends discoveries and important facts. 
 
-Gets Daily picture and description and shows them in a recycle view that can switch from grid and list layout.
-Swiping on cells will remove them and selecting them will expand for full screen content.
+- Download Beautiful High-Resolution Photos of all around the Galaxy
+- Share with Friends
+- Save Photos to use as Lock screen and Home screen
 
-![alt text](https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/assasn-14li_banner_0.jpg)
+Made possible by Nasa and their open API. More information: https://www.nasa.gov/multimedia/imagegallery/iotd.html
 
-Followed this Guide: https://www.raywenderlich.com/170075/android-recyclerview-tutorial-kotlin
+### Google Play
+http://play.google.com/store/apps/details?id=com.appleeducate.dailynasa
 
-Download on Google Play: http://play.google.com/store/apps/details?id=com.appleeducate.dailynasa
-![alt text](https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png)
+### App Store
+* Coming Soon *
