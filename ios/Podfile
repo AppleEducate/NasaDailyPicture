@@ -32,6 +32,7 @@ target 'Runner' do
   # Prepare symlinks folder. We use symlinks to avoid having Podfile.lock
   # referring to absolute paths on developers' machines.
   system('rm -rf Pods/.symlinks')
+  # system('mkdir -p Pods/.symlinks/flutter')
   system('mkdir -p Pods/.symlinks/plugins')
 
   # Flutter Pods
@@ -60,6 +61,10 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['ENABLE_BITCODE'] = 'NO'
+    end
+       # workaround for https://github.com/CocoaPods/CocoaPods/issues/7463
+      target.headers_build_phase.files.each do |file|
+      file.settings = { 'ATTRIBUTES' => ['Public'] }
     end
   end
 end

@@ -14,7 +14,7 @@ packages:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.2"
+    version: "1.4.3"
   async:
     dependency: transitive
     description:
@@ -28,7 +28,7 @@ packages:
       name: barback
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.15.2+15"
+    version: "0.15.2+16"
   boolean_selector:
     dependency: transitive
     description:
@@ -57,13 +57,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2+1"
-  cloud_firestore:
-    dependency: "direct main"
-    description:
-      name: cloud_firestore
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.3"
   collection:
     dependency: transitive
     description:
@@ -134,13 +127,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.3"
-  firebase_database:
-    dependency: "direct main"
-    description:
-      name: firebase_database
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.6"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -257,7 +243,7 @@ packages:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.1+4"
+    version: "0.12.2"
   meta:
     dependency: transitive
     description:
@@ -285,7 +271,7 @@ packages:
       name: node_preamble
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.0"
+    version: "1.4.1"
   package_config:
     dependency: transitive
     description:
@@ -334,7 +320,7 @@ packages:
       name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.6"
+    version: "1.3.7"
   quiver:
     dependency: transitive
     description:
@@ -395,7 +381,7 @@ packages:
       name: source_maps
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.4"
+    version: "0.10.5"
   source_span:
     dependency: transitive
     description:
@@ -416,7 +402,7 @@ packages:
       name: stream_channel
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.4"
+    version: "1.6.5"
   string_scanner:
     dependency: transitive
     description:
@@ -437,7 +423,7 @@ packages:
       name: test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.34"
+    version: "0.12.35"
   typed_data:
     dependency: transitive
     description:
@@ -489,4 +475,4 @@ packages:
     version: "2.1.13"
 sdks:
   dart: ">=2.0.0-dev.28.0 <=2.0.0-edge.c080951d45e79cd25df98036c4be835b284a269c"
-  flutter: ">=0.2.4 <2.0.0"
+  flutter: ">=0.1.4 <2.0.0"

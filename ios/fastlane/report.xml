@@ -5,32 +5,37 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.043315">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.016855">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: increment_build_number" time="3.446606">
+      <testcase classname="fastlane.lanes" name="1: increment_build_number" time="1.263834">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: get_certificates" time="3.962779">
+      <testcase classname="fastlane.lanes" name="2: get_certificates" time="6.58171">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: get_provisioning_profile" time="5.174996">
+      <testcase classname="fastlane.lanes" name="3: get_provisioning_profile" time="8.09046">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: cd ~/Projects/daily_nasa/ &amp;&amp; flutter build ios" time="88.509307">
+      <testcase classname="fastlane.lanes" name="4: cd ~/Documents/Github/daily_nasa/ &amp;&amp; flutter build ios" time="23.98029">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: cd ~/Projects/daily_nasa/ios/ &amp;&amp; open Runner.xcworkspace" time="0.123017">
+      <testcase classname="fastlane.lanes" name="5: build_app" time="46.301573">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: upload_to_testflight" time="480.011831">
         
       </testcase>
     
