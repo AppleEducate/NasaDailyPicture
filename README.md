@@ -13,4 +13,4 @@ Made possible by Nasa and their open API. More information: https://www.nasa.gov
 http://play.google.com/store/apps/details?id=com.appleeducate.dailynasa
 
 ### App Store
-* Coming Soon *
+*Coming Soon*
