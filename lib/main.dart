@@ -291,6 +291,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void goToAbout() {
+    _bannerAd?.dispose();
     Navigator.push(
       context,
       new MaterialPageRoute(builder: (context) => new HelpPage()),

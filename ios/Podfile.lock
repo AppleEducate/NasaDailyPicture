@@ -48,7 +48,7 @@ DEPENDENCIES:
   - firebase_admob (from `Pods/.symlinks/plugins/firebase_admob/ios`)
   - firebase_analytics (from `Pods/.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `Pods/.symlinks/plugins/firebase_core/ios`)
-  - Flutter (from `Pods/.symlinks/flutter/ios-release`)
+  - Flutter (from `Pods/.symlinks/flutter/ios`)
   - get_version (from `Pods/.symlinks/plugins/get_version/ios`)
   - share (from `Pods/.symlinks/plugins/share/ios`)
   - url_launcher (from `Pods/.symlinks/plugins/url_launcher/ios`)
@@ -63,7 +63,7 @@ EXTERNAL SOURCES:
   firebase_core:
     :path: Pods/.symlinks/plugins/firebase_core/ios
   Flutter:
-    :path: Pods/.symlinks/flutter/ios-release
+    :path: Pods/.symlinks/flutter/ios
   get_version:
     :path: Pods/.symlinks/plugins/get_version/ios
   share:
